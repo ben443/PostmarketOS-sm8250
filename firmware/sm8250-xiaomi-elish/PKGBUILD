@@ -1,0 +1,37 @@
+_mode=cross
+pkgname=firmware-sm8250-xiaomi-elish
+pkgver=0.1
+pkgrel=0
+_arches=specific
+arch=(aarch64)
+license=(custom:Proprietary)
+options=(!strip)
+_commit="d81ba3dfd6b13a719906b1e1f708fd3e46c8c39b"
+source=(
+    https://github.com/lujianhua/xiaomi-elish-firmware/archive/$_commit/xiaomi-elish-firmware-$_commit.tar.gz
+)
+sha256sums=('a9af1f898c7c017541ed12728687ac2de4e1b661781fc2a33c6805a5524d169e')
+builddir="xiaomi-elish-firmware-$_commit"
+
+package() {
+	install -Dm644 "$builddir"/sm8250/a650_zap.mbn -t \
+		"$pkgdir/usr/lib/firmware/qcom/sm8250/xiaomi/elish/"
+
+	install -Dm644 "$builddir"/sm8250/adsp* -t \
+		"$pkgdir/usr/lib/firmware/qcom/sm8250/xiaomi/elish/"
+
+	install -Dm644 "$builddir"/sm8250/cdsp* -t \
+		"$pkgdir/usr/lib/firmware/qcom/sm8250/xiaomi/elish/"
+
+	install -Dm644 "$builddir"/cirrus/cs35l41* -t \
+		"$pkgdir/usr/lib/firmware/cirrus/"
+
+	install -Dm644 "$builddir"/sm8250/slpi* -t \
+		"$pkgdir/usr/lib/firmware/qcom/sm8250/xiaomi/elish/"
+
+	install -Dm644 "$builddir"/novatek/nt36523* -t \
+		"$pkgdir/usr/lib/firmware/novatek/"
+
+	install -Dm644 "$builddir"/sm8250/venus.mbn -t \
+		"$pkgdir/usr/lib/firmware/qcom/sm8250/xiaomi/elish/"
+}
