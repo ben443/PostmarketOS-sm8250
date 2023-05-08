@@ -1,0 +1,27 @@
+_mode=cross
+_nodeps=true
+pkgname=flavour-plasma-desktop
+pkgdesc="Kupfer flavour: The qt-based plasma desktop environment"
+pkgver=1.0
+pkgrel=2
+_arches=all
+arch=(
+    x86_64
+    aarch64
+    armv7h
+)
+license=(GPL3)
+depends=(
+    plasma-meta
+    plasma-wayland-session
+    qt5-virtualkeyboard
+    maliit-keyboard
+)
+source=(plasma-desktop.lst virtualkbd.conf)
+sha256sums=('d58485a86f74a2b3a1aa3d4cdbbb485ae400b8e95e8455d1737391944231cde0'
+            '05a48d57f2e39434c9d06c087559676e3604005eddd46bed1b2e00dec8b933b8')
+
+package() {
+    install -Dm644 "$srcdir"/plasma-desktop.lst "$pkgdir"/etc/kupfer/systemd/plasma-desktop.lst
+    install -Dm644 "$srcdir"/virtualkbd.conf "$pkgdir"/etc/sddm.conf.d/virtualkbd.conf
+}
