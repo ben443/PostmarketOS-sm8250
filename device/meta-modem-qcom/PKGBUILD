@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=meta-modem-qcom
 pkgdesc="Metapackage for Qualcomm SoC modem support"
 pkgver=0.1
-pkgrel=5
+pkgrel=6
 _arches=specific
 arch=(
     aarch64
@@ -11,7 +11,8 @@ arch=(
 )
 license=(GPL)
 depends=(
-    modemmanager-qcom
+    "modemmanager>=1.22.0"
+    "libmm-glib>=1.22.0"
     msm-modem-uim-selection
 )
 source=(
