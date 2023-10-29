@@ -23,7 +23,7 @@ default:
           echo "KBS branch up to date with remote commit '$dest_commit'" ;
         fi
       fi
-    - mkdir -p /kupfer/{pkgbuilds,packages,prebuilts} /root/.cache/kupfer "$(dirname "$LOGFILE")"
+    - mkdir -p /kupfer/{pkgbuilds,packages,prebuilts,pacman} /root/.cache/kupfer "$(dirname "$LOGFILE")"
     - mount --rbind /kupfer/{packages,prebuilts}
     - mount --rbind "$CI_PROJECT_DIR" /kupfer/pkgbuilds/
     - for dir in /pkgbuilds /prebuilts; do mkdir -p "$dir" && mount --bind /kupfer"$dir" "$dir"; done
@@ -63,6 +63,16 @@ check_formatting:
     - export PACKAGER="${PACKAGER_NAME} <${PACKAGER_EMAIL}>"
     - cd /kupfer
     - git clone --depth=5 -b "$REPOBRANCH" https://gitlab.com/kupfer/packages/prebuilts.git packages
+    - cd /kupfer/packages
+    - |
+      # move prebuilts to pacman cache to start with empty pacman repo; leave db files intact for hash comparisons
+      for repo_arch in $(find -maxdepth 1 -type d -regex './[a-z]+[a-z0-9_]*' -print0 | xargs -0 -n1 basename); do
+        target_dir="/kupfer/pacman/${repo_arch}"
+        mkdir -p "$target_dir"
+        for file in "$repo_arch"/*/*.pkg.tar.*; do
+          mv -f -v "$file" "$target_dir"
+        done
+      done
     - cd /kupfer/pkgbuilds
     - .gitlab/clean_srcinfo_cache.sh
     - git fetch --unshallow origin "$REPOBRANCH"
