@@ -1,0 +1,60 @@
+_mode=cross
+_nodeps=true
+pkgname=device-sdm670-common
+pkgdesc="Common package for Qualcomm SDM670 devices"
+pkgver=0.1
+pkgrel=1
+_arches=specific
+arch=(aarch64)
+license=(MIT)
+provides=(alsa-ucm-conf)
+conflicts=(alsa-ucm-conf)
+depends=(
+    linux-firmware-qcom
+    linux-firmware-qca
+    linux-firmware-ath10k
+    linux-sdm670
+    pd-mapper-git
+    qrtr-git
+    rmtfs-git
+    tqftpserv-git
+    boot-android-common
+    meta-modem-qcom
+    q6voiced
+    bootmac
+)
+_ucm_commit=936bf67b619f0b76933ef2433a5d136c7d78e5aa
+_pmos_commit=be110154ba203db01e58f87ee212657705abc129
+source=(
+    "git+https://gitlab.com/sdm670-mainline/alsa-ucm-conf.git/#commit=$_ucm_commit"
+    "https://gitlab.com/postmarketOS/pmaports/-/raw/$_pmos_commit/device/community/soc-qcom-sdm845/51-qcom-sdm845.lua"
+    sdm670-common.conf
+    sdm670.lst
+    sdm670_callaudio.lst
+)
+sha256sums=(
+    SKIP
+    e7aa0d249cae6597b5222835c6c903bb26b3c373db459b6653f6111544ea8f09
+    557bde976b39d767305b870f0de1f5572bda953afc7d8ea153bf4b6cd2ae913d
+    b6834f1eb597cf5846ce730f52d3b24b4b3eaca66388d2b8611d1ca5e37dbdf5
+    5fe3bafa0c952816e6bd4e5e0d59df4492ef46382b4cf77ae9d5230efe0a2520
+)
+
+package() {
+    install -Dm644 "$srcdir"/sdm670-common.conf "$pkgdir"/etc/kupfer/mkinitcpio.conf.d/sdm670-common.conf
+    install -Dm644 "$srcdir"/sdm670.lst "$pkgdir"/etc/kupfer/systemd/sdm670.lst
+
+    install -Dm644 "$srcdir"/sdm670_callaudio.lst "$pkgdir"/etc/kupfer/systemd/user/sdm670_callaudio.lst
+
+    # alsa ucm config
+    cd "$srcdir"/alsa-ucm-conf
+    export alsadir="${pkgdir}/usr/share/alsa/"
+    find ucm2 -type f -iname "*.conf" -exec install -vDm 644 {} "$alsadir"{} \;
+    find ucm2 -type l -iname "*.conf" -exec bash -c 'install -vdm 755 "${alsadir}$(dirname "{}")" && cp -dv "{}" "${alsadir}{}"' \;
+    install -vDm 644 LICENSE -t "$pkgdir/usr/share/licenses/$pkgname"
+    install -vDm 644 README.md -t "$pkgdir/usr/share/doc/$pkgname"
+    install -vDm 644 ucm2/README.md -t "$pkgdir/usr/share/doc/$pkgname/ucm2"
+
+    # wireplumber config
+    install -Dm644 "$srcdir"/51-qcom-sdm845.lua "$pkgdir"/usr/share/wireplumber/main.lua.d/51-qcom-sdm845.lua
+}
