@@ -3,7 +3,7 @@ _pkgbase=linux-firmware
 pkgbase=firmware-linux
 pkgdesc="Firmware files for Linux"
 pkgver=20231211
-pkgrel=1
+pkgrel=2
 _arches=specific
 arch=(any)
 license=(
@@ -19,7 +19,7 @@ source=("https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware
 sha256sums=(d0ba54f05f5dd34b0fc5a1e1970cd9cbc48491d2da97f3798a9e13530dc18298)
 
 _dir="linux-firmware-${pkgver}"
-_folders="qcom ath10k"
+_folders="qcom qca ath10k"
 # Full list of all folders. We only enable the ones we actually need, because it slows down makepkg extremely
 #_folders="3com acenic adaptec advansys amd amd-ucode amdgpu ar3k ath10k ath11k
 #    ath6k ath9k_htc atmel atusb av7110 bnx2 bnx2x brcm cadence cavium cis cpia2
