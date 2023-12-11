@@ -4,6 +4,7 @@
 # Contributor: David Rheinsberg <david.rheinsberg at gmail dot com>
 # Contributor: David Herrmann <dh.herrmann at gmail dot com>
 _mode=host
+_nodeps=true
 _pkgname=qemu-user-static
 pkgname=qemu-user-static-bin
 pkgdesc="A generic and open source machine emulator, statically linked"
