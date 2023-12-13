@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=flavour-phosh-minimal
 pkgdesc="Kupfer flavour: The gtk-based Phosh (Phone Shell) environment (minimal edition)"
 pkgver=0.1
-pkgrel=4
+pkgrel=5
 _arches=all
 arch=(
     x86_64
@@ -18,9 +18,19 @@ depends=(
     meta-gnome-minimal-common
     gnome-calls
 )
-source=(phosh.lst)
-sha256sums=(a1bead1bd80c5944ee5b9712117736dc3006bcae0b97fc8407ea7f622bcd49ae)
+source=(
+    phosh.lst
+    override.conf
+    phosh.service
+)
+sha256sums=(
+    a1bead1bd80c5944ee5b9712117736dc3006bcae0b97fc8407ea7f622bcd49ae
+    39d68b2d476130956aeb235af52f275200a1ac74798957b149defcf5e23b889f
+    8bdf19952cdec76cc3d45d3be03aed3fd1c1815c0560317404c50293e17a1ded
+)
 
 package() {
     install -Dm644 "$srcdir"/phosh.lst "$pkgdir"/etc/kupfer/systemd/phosh.lst
+    install -Dm644 "$srcdir"/override.conf "$pkgdir"/usr/lib/systemd/user/sm.puri.Phosh.service.d/override.conf
+    install -Dm644 "$srcdir"/phosh.service "$pkgdir"/usr/lib/systemd/system/phosh.service
 }
