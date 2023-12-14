@@ -1,8 +1,9 @@
 # can't be _mode=cross due to musl-gcc
 _mode=host
+_crossdirect=false
 pkgname=mkinitcpio-busybox-kupfer
 pkgdesc="Base initramfs tools"
-pkgver=1.36.0
+pkgver=1.36.1
 pkgrel=1
 _arches=all
 arch=(
@@ -24,7 +25,7 @@ source=(
     config
 )
 sha256sums=(
-    542750c8af7cb2630e201780b4f99f3dcceeb06f505b479ec68241c1e6af61a5
+    b8cc24c9574d809e7279c3be349795c5d5ceb6fdf19ca709f80cde50e47de314
     214ce3c2e5df9353f01b6fb7892bc235d5a39a462f0a0e9680f6aa65b5f4252e
 )
 
