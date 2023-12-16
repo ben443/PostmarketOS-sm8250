@@ -72,6 +72,7 @@ check_formatting:
         for file in "$repo_arch"/*/*.pkg.tar.*; do
           mv -f -v "$file" "$target_dir"
         done
+        rm -fv "$repo_arch"/*/*.{db,files}.tar.*
       done
     - cd /kupfer/pkgbuilds
     - .gitlab/clean_srcinfo_cache.sh
@@ -90,6 +91,10 @@ check_formatting:
     # gitlab doesn't resolve symlinks, replace them
     - find -type l '(' -name '*.files' -o -name '*.db' ')' -exec /kupfer/pkgbuilds/.gitlab/copy_db_symlinks.sh {} +
     - (git ls-files --others --deleted --exclude-standard | grep '\.pkg\.tar\.' | tee /dev/stderr | xargs -r dirname | xargs --verbose --no-run-if-empty -- git add) || echo "Apparently no package changes to upload."
+    - >
+      if (echo "$CI_COMMIT_MESSAGE" | grep -q '\[KUPFER_CI_FORCE_COMMIT_REPOS\]') ; then
+        git add [a-z]*/*/*.{db,files}.tar.*
+      fi
     - git status
     - rm -f "$SRCINFO_CACHE_ARCHIVE" && (cd /kupfer/pkgbuilds && tar -czf "$SRCINFO_CACHE_ARCHIVE" */*/{.srcinfo_initialised.json,.SRCINFO,.srcinfo_meta.json} && cp "$SRCINFO_CACHE_ARCHIVE" /kupfer/packages/)
     -
@@ -137,7 +142,13 @@ build_packages:
   after_script:
     - "echo 'after_script: copying files!'"
     - cd /kupfer/packages
-    - for p in $(git ls-files --others --exclude-standard | grep '\.pkg\.') ; do echo "copying $p" ; install -Dm644 "$p" "$CI_PROJECT_DIR/packages/$p" || true; done
+    - >
+      for p in \
+            $(git ls-files --others --exclude-standard | grep -E -e'\.pkg\.tar') \
+            $(if (echo "$CI_COMMIT_MESSAGE" | grep -q '\[KUPFER_CI_FORCE_COMMIT_REPOS\]') ; then echo [a-z]*/*/*.{db,files}.tar.* ; fi) \
+      ; do
+        echo "copying $p" ; install -Dm644 "$p" "$CI_PROJECT_DIR/packages/$p" || true; 
+      done
   artifacts:
     <<: *logartifacts
     name: artifacts
