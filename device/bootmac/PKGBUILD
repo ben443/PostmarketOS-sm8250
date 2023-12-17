@@ -1,7 +1,7 @@
 _mode=host
 pkgname=bootmac
 pkgdesc="Configure MAC addresses at boot"
-pkgver=0.2.1.r0.g74e98c8
+pkgver=0.3.0.r0.gef147ec
 pkgrel=1
 _arches=specific
 arch=(
@@ -10,12 +10,14 @@ arch=(
 license=(GPL-3.0-or-later)
 url=https://gitlab.com/postmarketOS/bootmac
 depends=(bluez-utils)
-_commit=74e98c87e254885fecd4579fe54c63685e3403e7
+_commit=ef147ec9973ac473275e4259125255e3a6f52edb
 source=(
     "git+https://gitlab.com/postmarketOS/bootmac.git#commit=$_commit"
+    bootmac-bt.service
 )
 sha256sums=(
     SKIP
+    5c9b2a4539b4d8a351c3545d75db1a6437bc1ebda0d29e57de9ffe460180e60a
 )
 
 pkgver() {
@@ -28,4 +30,6 @@ package() {
 
     install -Dm644 bootmac.rules "$pkgdir"/usr/lib/udev/rules.d/90-bootmac.rules
     install -Dm755 bootmac "$pkgdir"/usr/bin/bootmac
+
+    install -Dm644 "$srcdir"/bootmac-bt.service "$pkgdir"/usr/lib/systemd/system/bootmac-bt.service
 }

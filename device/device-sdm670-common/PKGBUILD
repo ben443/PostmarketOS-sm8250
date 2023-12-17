@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=device-sdm670-common
 pkgdesc="Common package for Qualcomm SDM670 devices"
 pkgver=0.1
-pkgrel=1
+pkgrel=2
 _arches=specific
 arch=(aarch64)
 license=(MIT)
@@ -31,6 +31,7 @@ source=(
     sdm670-common.conf
     sdm670.lst
     sdm670_callaudio.lst
+    bootmac-bt.lst
 )
 sha256sums=(
     SKIP
@@ -38,11 +39,13 @@ sha256sums=(
     557bde976b39d767305b870f0de1f5572bda953afc7d8ea153bf4b6cd2ae913d
     b6834f1eb597cf5846ce730f52d3b24b4b3eaca66388d2b8611d1ca5e37dbdf5
     5fe3bafa0c952816e6bd4e5e0d59df4492ef46382b4cf77ae9d5230efe0a2520
+    05bfc075fa627d4cee84275e81100319259f0c414727c868909d3f685ef1eaf3
 )
 
 package() {
     install -Dm644 "$srcdir"/sdm670-common.conf "$pkgdir"/etc/kupfer/mkinitcpio.conf.d/sdm670-common.conf
     install -Dm644 "$srcdir"/sdm670.lst "$pkgdir"/etc/kupfer/systemd/sdm670.lst
+    install -Dm644 "$srcdir"/bootmac-bt.lst "$pkgdir"/etc/kupfer/systemd/bootmac-bt.lst
 
     install -Dm644 "$srcdir"/sdm670_callaudio.lst "$pkgdir"/etc/kupfer/systemd/user/sdm670_callaudio.lst
 

@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=device-sdm845-common
 pkgdesc="Common package for Qualcomm SDM845 devices"
 pkgver=0.5
-pkgrel=2
+pkgrel=3
 _arches=specific
 arch=(aarch64)
 license=(MIT)
@@ -28,6 +28,7 @@ source=(
     sdm845-common.conf
     sdm845.lst
     sdm845_callaudio.lst
+    bootmac-bt.lst
     callaudio-idle-workaround.service
     alsa-restore.service.override
     "https://gitlab.com/postmarketOS/pmaports/-/raw/${_pmos_commit}/device/community/soc-qcom-sdm845/call_audio_idle_suspend_workaround.sh"
@@ -39,6 +40,7 @@ sha256sums=(
     557bde976b39d767305b870f0de1f5572bda953afc7d8ea153bf4b6cd2ae913d
     b6834f1eb597cf5846ce730f52d3b24b4b3eaca66388d2b8611d1ca5e37dbdf5
     1ae2de281a337ba5c135368f3a68e414cd459affe04432706338cda7a84f1044
+    05bfc075fa627d4cee84275e81100319259f0c414727c868909d3f685ef1eaf3
     2df59440faccce3ce1ff8a2666c08252d2519e7ff9ab9b66c0d7cac9fcc2a5af
     6a86566df76ba9dd6651353c00a9cdb2c253bbd88b580a6c8acb04b3f97f8c87
     28d9d6359759339de512dc0fa7250648a7e1da3571e6beaef01bff4a57161a13
@@ -50,6 +52,7 @@ sha256sums=(
 package() {
     install -Dm644 "$srcdir"/sdm845-common.conf "$pkgdir"/etc/kupfer/mkinitcpio.conf.d/sdm845-common.conf
     install -Dm644 "$srcdir"/sdm845.lst "$pkgdir"/etc/kupfer/systemd/sdm845.lst
+    install -Dm644 "$srcdir"/bootmac-bt.lst "$pkgdir"/etc/kupfer/systemd/bootmac-bt.lst
 
     install -Dm755 "$srcdir"/callaudio-idle-workaround.service "$pkgdir"/usr/lib/systemd/user/callaudio-idle-workaround.service
     install -Dm644 "$srcdir"/sdm845_callaudio.lst "$pkgdir"/etc/kupfer/systemd/user/sdm845_callaudio.lst
