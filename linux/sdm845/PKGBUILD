@@ -2,7 +2,7 @@ _mode=cross
 _kernelname=sdm845
 pkgbase="linux-$_kernelname"
 _desc="Qualcomm SDM845 kernel"
-pkgver=6.4.13
+pkgver=6.6.3
 pkgrel=1
 _arches=specific
 arch=(aarch64)
@@ -18,7 +18,7 @@ makedepends=(
     cpio
 )
 options=(!strip)
-_commit=72f5aef00c21569d258e6e3e3cb50ebdecd2307d
+_commit=b26a64f3de381af1a589f20d88d3757acb1785a4
 source=(
     "linux-${_commit}.tar.gz::${url}/-/archive/${_commit}.tar.gz"
     extra_config
@@ -27,7 +27,7 @@ source=(
     90-linux.hook
 )
 sha256sums=(
-    1d4c04d5e5a3f94fbf1f6348d85605afa04f5643161fcf250e0b5d30624551f8
+    d2c1a8456a1cb47b310d1d7b8ed2d7b8ccbb8a5c5902e5ec20888c682b9a49bc
     770324694413ee2491d2987586cba072cfc0e62d0a520d267bbd66acafedaa61
     66644820faa950a5fc59181f5aefcbed6d7ed652b29aee69979a2be2a032025d
     ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21
@@ -95,8 +95,8 @@ _package() {
     echo "${_kernver}" |
         install -Dm644 /dev/stdin "${pkgdir}/usr/lib/modules/${_extramodules}/version"
 
-    # remove build and source links
-    rm "${pkgdir}/usr/lib/modules/${_kernver}/"{source,build}
+    # remove build link
+    rm "${pkgdir}/usr/lib/modules/${_kernver}/build"
 
     # now we call depmod...
     depmod -b "${pkgdir}/usr" -F System.map "${_kernver}"
