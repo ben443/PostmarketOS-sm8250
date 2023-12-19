@@ -1,7 +1,7 @@
 _mode=host
 pkgname=phosh-osk-stub
 pkgdesc="Stub for debugging OSK / input related issues with phosh"
-pkgver=0.28.0.r0.ga0c8313
+pkgver=0.34.0.r0.gf7bfecf
 pkgrel=1
 _arches=all
 arch=(
@@ -22,7 +22,7 @@ makedepends=(
     meson
     ninja
 )
-_commit=a0c8313d3916be49990e913686ab4d18672f386b
+_commit=f7bfecf5637efd9d62710360fc773e0704cca52c
 source=(
     "git+$url#commit=$_commit"
 )
