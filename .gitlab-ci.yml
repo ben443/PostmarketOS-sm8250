@@ -93,7 +93,7 @@ check_formatting:
     - (git ls-files --others --deleted --exclude-standard | grep '\.pkg\.tar\.' | tee /dev/stderr | xargs -r dirname | xargs --verbose --no-run-if-empty -- git add) || echo "Apparently no package changes to upload."
     - >
       if (echo "$CI_COMMIT_MESSAGE" | grep -q '\[KUPFER_CI_FORCE_COMMIT_REPOS\]') ; then
-        git add [a-z]*/*/*.{db,files}.tar.*
+        git add [a-z]*/*/*.{db,files}{,.tar.*}
       fi
     - git status
     - rm -f "$SRCINFO_CACHE_ARCHIVE" && (cd /kupfer/pkgbuilds && tar -czf "$SRCINFO_CACHE_ARCHIVE" */*/{.srcinfo_initialised.json,.SRCINFO,.srcinfo_meta.json} && cp "$SRCINFO_CACHE_ARCHIVE" /kupfer/packages/)
