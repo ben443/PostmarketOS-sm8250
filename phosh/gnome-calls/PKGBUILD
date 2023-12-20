@@ -2,7 +2,7 @@
 _mode=host
 pkgname=gnome-calls
 pkgdesc="Make and receive PSTN phone calls"
-pkgver=44.2.r0.g91e5cad
+pkgver=45.0.r0.g936d362
 pkgrel=1
 _arches=all
 arch=(
@@ -32,7 +32,7 @@ makedepends=(
     git
     python-docutils
 )
-_commit="91e5cad939f6753bc232c8990be295b068473949"
+_commit="936d36287324163b958c6ea0c4297c7a607ee18c"
 source=("git+https://gitlab.gnome.org/GNOME/calls.git#commit=$_commit")
 sha256sums=(SKIP)
 
@@ -44,15 +44,6 @@ pkgver() {
 prepare() {
   cd calls
   git submodule--helper update --init
-
-  local src
-  for src in "${source[@]}"; do
-    src="${src%%::*}"
-    src="${src##*/}"
-    [[ $src = *.patch ]] || continue
-    echo "Applying patch $src..."
-    patch -Np1 < "../$src"
-  done
 }
 
 build() {
