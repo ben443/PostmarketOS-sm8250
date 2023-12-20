@@ -28,6 +28,16 @@ source=("https://archlinuxarm.org/builder/xtools/x-tools7h.tar.xz")
 sha256sums=(
     92974755f86fe13c3b2536e62c4ade0ba03964a92f55c7e712884160bf0d6d5a
 )
+noextract=(
+    x-tools7h.tar.xz
+)
+
+prepare() {
+    target_dir="$srcdir/x-tools7h"
+    [[ ! -e "$target_dir" ]] || find "$target_dir" -type d -exec chmod 755 '{}' '+'
+    rm -rf "$target_dir"
+    bsdtar -xf "$srcdir/x-tools7h.tar.xz" -C "$srcdir"
+}
 
 package() {
     archname="arm-unknown-linux-gnueabihf"

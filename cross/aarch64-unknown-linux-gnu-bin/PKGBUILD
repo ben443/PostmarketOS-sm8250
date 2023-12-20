@@ -22,6 +22,16 @@ source=("https://archlinuxarm.org/builder/xtools/$pkgver/x-tools8.tar.xz")
 sha256sums=(
     eb94abd01421b90d3756490b37135d25efbf0bf556d8fa6391111106a68c50e6
 )
+noextract=(
+    x-tools8.tar.xz
+)
+
+prepare() {
+    target_dir="$srcdir/x-tools8"
+    [[ ! -e "$target_dir" ]] || find "$target_dir" -type d -exec chmod 755 '{}' '+'
+    rm -rf "$target_dir"
+    bsdtar -xf "$srcdir/x-tools8.tar.xz" -C "$srcdir"
+}
 
 package() {
     archname="aarch64-unknown-linux-gnu"
