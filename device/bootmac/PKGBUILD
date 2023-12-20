@@ -1,7 +1,7 @@
 _mode=host
 pkgname=bootmac
 pkgdesc="Configure MAC addresses at boot"
-pkgver=0.2.0.r0.g5bfd530
+pkgver=0.2.1.r0.g74e98c8
 pkgrel=1
 _arches=specific
 arch=(
@@ -9,7 +9,8 @@ arch=(
 )
 license=(GPL-3.0-or-later)
 url=https://gitlab.com/postmarketOS/bootmac
-_commit=5bfd530f11d60713d2fabb71e82eaba9795a5031
+depends=(bluez-utils)
+_commit=74e98c87e254885fecd4579fe54c63685e3403e7
 source=(
     "git+https://gitlab.com/postmarketOS/bootmac.git#commit=$_commit"
 )
