@@ -83,7 +83,7 @@ check_formatting:
   script: &build_script
     - cd /kupfer/pkgbuilds
     # FIXME: building cross/ prevents these packages from getting dropped; will be fixed by proper multiarch support
-    - script -e --log-out "$LOGFILE" -c "kupferbootstrap -v packages build --arch 'x86_64' cross/*"
+    - script -e --log-out "$LOGFILE" -c "kupferbootstrap -v packages build --arch 'x86_64' $(echo cross/*/PKGBUILD | xargs -n1 dirname | xargs)"
     - script -e --log-out "$LOGFILE" -c "kupferbootstrap -v packages build --arch '$buildarch' all"
     - 'cd /kupfer/pkgbuilds && ./.gitlab/check_modified.sh'
     - cd /kupfer/packages
