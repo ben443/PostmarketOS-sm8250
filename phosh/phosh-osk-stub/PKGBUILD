@@ -17,6 +17,7 @@ depends=(
     phoc
     libhandy
     presage
+    wayland-protocols
 )
 makedepends=(
     meson
@@ -43,6 +44,8 @@ build() {
 
 package() {
     DESTDIR="$pkgdir" ninja -C _build install
+
+    rm "$pkgdir"/usr/share/applications/sm.puri.OSK0.desktop  # conflicts with phosh
 
     install -Dm755 _build/src/phosh-osk-stub \
          "$pkgdir"/usr/bin/phosh-osk-stub
