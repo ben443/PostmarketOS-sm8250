@@ -1,24 +1,30 @@
 _mode=cross
 pkgname=firmware-sdm845-xiaomi-beryllium
-pkgver=0.2
-pkgrel=2
+pkgver=0.3
+pkgrel=1
 _arches=specific
 arch=(aarch64)
 license=(custom:Proprietary)
 options=(!strip)
+_commit=9ce691fb2e629476a33e037bdcd039cd7e8c5a6c
+_board2_commit=fc750b3f1bda29c08cfe9329eb781c0ae3608456
 source=(
-    "git+https://gitlab.com/sdm845-mainline/firmware-xiaomi-beryllium.git"
+    "git+https://gitlab.com/sdm845-mainline/firmware-xiaomi-beryllium.git#commit=${_commit}"
+    https://gitlab.com/dylanvanassche/ath10k-firmware/-/raw/$_board2_commit/linux-firmware/board-2.bin
 )
 sha256sums=(
     SKIP
+    c8315064eda03b86b5f9388f6524dd5973ec02d260cf2ae18a5cb594f44cccdb
 )
 
 build() {
     cd "$srcdir"/firmware-xiaomi-beryllium
-    mkdir -p usr
-    mv lib usr
+    rm -r lib/firmware/ath10k
+    mv lib/* usr/lib
+    rmdir lib
 }
 
 package() {
+    install -Dm644 "$srcdir"/board-2.bin "$pkgdir"/usr/lib/firmware/ath10k/WCN3990/hw1.0/board-2.bin
     cp -avf "$srcdir"/firmware-xiaomi-beryllium/* "$pkgdir"/
 }
