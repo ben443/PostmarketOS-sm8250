@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=device-sdm845-common
 pkgdesc="Common package for Qualcomm SDM845 devices"
 pkgver=0.5
-pkgrel=1
+pkgrel=2
 _arches=specific
 arch=(aarch64)
 license=(MIT)
@@ -23,7 +23,7 @@ depends=(
     bootmac
 )
 _ucm_commit=9ed12836b269764c4a853411d38ccb6abb70b383
-_pmos_commit=ff6721c3c848ab893677dfe437d3430661ec3cc7
+_pmos_commit=098b71ba7666a79818c0d4b130340e1b435f812e
 source=(
     sdm845-common.conf
     sdm845.lst
@@ -32,6 +32,7 @@ source=(
     alsa-restore.service.override
     "https://gitlab.com/postmarketOS/pmaports/-/raw/${_pmos_commit}/device/community/soc-qcom-sdm845/call_audio_idle_suspend_workaround.sh"
     "https://gitlab.com/postmarketOS/pmaports/-/raw/${_pmos_commit}/device/community/soc-qcom-sdm845/90-feedbackd-pmi8998.rules"
+    "https://gitlab.com/postmarketOS/pmaports/-/raw/${_pmos_commit}/device/community/soc-qcom-sdm845/51-qcom-sdm845.lua"
     "git+https://gitlab.com/sdm845-mainline/alsa-ucm-conf.git/#commit=$_ucm_commit"
 )
 sha256sums=(
@@ -42,6 +43,7 @@ sha256sums=(
     6a86566df76ba9dd6651353c00a9cdb2c253bbd88b580a6c8acb04b3f97f8c87
     28d9d6359759339de512dc0fa7250648a7e1da3571e6beaef01bff4a57161a13
     897f2f5533644668b63e5fbff917e050af1cfb7472553c3ee520388c932ab6f9
+    e7aa0d249cae6597b5222835c6c903bb26b3c373db459b6653f6111544ea8f09
     SKIP
 )
 
@@ -58,6 +60,7 @@ package() {
     # taken from pmos:
     install -Dm755 "$srcdir"/call_audio_idle_suspend_workaround.sh "$pkgdir"/usr/bin/callaudio-idle-workaround
     install -Dm644 "$srcdir"/90-feedbackd-pmi8998.rules "$pkgdir"/usr/lib/udev/rules.d/90-feedbackd-pmi8998.rules
+    install -Dm644 "$srcdir"/51-qcom-sdm845.lua "$pkgdir"/usr/share/wireplumber/main.lua.d/51-qcom-sdm845.lua
 
     # alsa ucm config
     cd "$srcdir"/alsa-ucm-conf
