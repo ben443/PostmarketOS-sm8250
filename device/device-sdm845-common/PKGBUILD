@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=device-sdm845-common
 pkgdesc="Common package for Qualcomm SDM845 devices"
 pkgver=0.5
-pkgrel=3
+pkgrel=4
 _arches=specific
 arch=(aarch64)
 license=(MIT)
@@ -54,7 +54,7 @@ package() {
     install -Dm644 "$srcdir"/sdm845.lst "$pkgdir"/etc/kupfer/systemd/sdm845.lst
     install -Dm644 "$srcdir"/bootmac-bt.lst "$pkgdir"/etc/kupfer/systemd/bootmac-bt.lst
 
-    install -Dm755 "$srcdir"/callaudio-idle-workaround.service "$pkgdir"/usr/lib/systemd/user/callaudio-idle-workaround.service
+    install -Dm644 "$srcdir"/callaudio-idle-workaround.service "$pkgdir"/usr/lib/systemd/user/callaudio-idle-workaround.service
     install -Dm644 "$srcdir"/sdm845_callaudio.lst "$pkgdir"/etc/kupfer/systemd/user/sdm845_callaudio.lst
 
     # temporary alsa-restore workaround for broken audio on sdm845
