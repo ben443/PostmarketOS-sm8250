@@ -51,8 +51,9 @@ prepare() {
 
 build() {
     # reproducible build
-    export KCONFIG_NOTIMESTAMP=1
-    export CC=musl-gcc CXX=musl-gcc
+    KCONFIG_NOTIMESTAMP=1
+    CC=musl-gcc
+    CXX=musl-gcc
     LDFLAGS="$LDFLAGS -static" make -C "busybox-$pkgver" CC=musl-gcc CXX=musl-gcc
 }
 
