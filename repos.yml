@@ -28,6 +28,10 @@ repos:
   plasma_mobile:
     options:
       SigLevel: Never
+  gnome_mobile:
+    local_only: true
+    options:
+      SigLevel: Never
 base_distros:
   x86_64:
     remote_url: https://geo.mirror.pkgbuild.com/$repo/os/$arch
