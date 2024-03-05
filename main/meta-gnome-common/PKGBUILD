@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=meta-gnome-common
 pkgdesc="Common metapackage for the GNOME shell"
 pkgver=1.0
-pkgrel=3
+pkgrel=4
 _arches=all
 arch=(
     x86_64
@@ -60,6 +60,7 @@ depends=(
     mutter
     nautilus
     orca
+    pipewire-jack
     rygel
     simple-scan
     sushi
