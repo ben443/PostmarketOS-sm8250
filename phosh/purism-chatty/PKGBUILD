@@ -1,4 +1,5 @@
-# Maintainer: Danct12 <danct12@disroot.org>
+# Maintainer: Raihan Ahamed <raihan1999ahamed@gmail.com>
+# Co-Maintainer: Danct12 <danct12@disroot.org>
 _mode=host
 pkgname=purism-chatty
 pkgdesc="SMS/MMS, Matrix and (optionally) XMPP messaging app"

@@ -1,4 +1,5 @@
-# Maintainer: Caleb Fontenot <foley2431 at gmail dot com>
+# Maintainer: Raihan Ahamed <raihan1999ahamed@gmail.com>
+# Co-Maintainer: Caleb Fontenot <foley2431 at gmail dot com>
 # Co-Maintainer: Lance G. <gero3977 at gmail dot com>
 _mode=host
 pkgname=mmsd-tng

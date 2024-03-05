@@ -1,4 +1,5 @@
-# Maintainer: Silvio Knizek <killermoehre@gmx.net>
+# Maintainer: Raihan Ahamed <raihan1999ahamed@gmail.com>
+# Co-Maintainer: Silvio Knizek <killermoehre@gmx.net>
 _mode=host
 pkgname=libpurple-xmpp-http-upload
 pkgdesc="HTTP File Upload plugin for libpurple (XMPP Protocol)"

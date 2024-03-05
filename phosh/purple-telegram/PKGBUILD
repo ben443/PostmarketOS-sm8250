@@ -1,5 +1,5 @@
+# Maintainer: Raihan Ahamed <raihan1999ahamed@gmail.com>
 # Original Author: Danct12 <danct12@disroot.org>
-# Maintainer:
 _mode=host
 pkgname=purple-telegram
 pkgdesc="Purple Telegram plugin"
