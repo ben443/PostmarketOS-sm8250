@@ -29,7 +29,6 @@ repos:
     options:
       SigLevel: Never
   gnome_mobile:
-    local_only: true
     options:
       SigLevel: Never
 base_distros:
