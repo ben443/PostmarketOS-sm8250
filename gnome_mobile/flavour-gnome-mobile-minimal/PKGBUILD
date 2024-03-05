@@ -1,3 +1,4 @@
+# Maintainer: Raihan Ahamed <raihan1999ahamed@gmail.com>
 _mode=cross
 _nodeps=true
 pkgname=flavour-gnome-mobile-minimal
