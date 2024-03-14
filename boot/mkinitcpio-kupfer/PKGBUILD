@@ -2,8 +2,8 @@ _mode=cross
 _nodeps=true
 pkgname=mkinitcpio-kupfer
 pkgdesc="Modular initramfs image creation utility"
-pkgver=31
-pkgrel=2
+pkgver=38.1
+pkgrel=1
 _arches=all
 arch=(
     aarch64
@@ -15,7 +15,13 @@ provides=(
     mkinitcpio
     initramfs
 )
-conflicts=(mkinitcpio)
+conflicts=(
+    mkinitcpio
+    "systemd<255.4-2"
+    "cryptsetup<2.7.0-3"
+    "mdadm<4.3-2"
+    "lvm2<2.03.23-3"
+)
 depends=(
     awk
     mkinitcpio-busybox-kupfer
@@ -24,12 +30,18 @@ depends=(
     libarchive
     coreutils
     bash
+    binutils
     diffutils
     findutils
     grep
     filesystem
     gzip
     systemd
+)
+checkdepends=(
+    bats
+    bats-assert
+    lzop
 )
 optdepends=(
     "xz: Use lzma or xz compression for the initramfs image"
@@ -44,15 +56,21 @@ install=mkinitcpio.install
 source=(
     "https://sources.archlinux.org/other/mkinitcpio/mkinitcpio-$pkgver.tar.gz"
     0001-use-gzip-for-compression-by-default.patch
+    0002-functions-handle-gzip-compressed-kernels-in-kver_gen.patch
+    0003-check-for-ALARM-kernels-in-run_post_hooks.patch
 )
 sha256sums=(
-    8f2811250b852ab78375bf90e1a7430daa132e57e128b0f6eaadddd9b27bbc63
-    f65d40212674d03afa0168a3dbec3ec00b7908406f44964daea34d992cd2f57e
+    5c63525097a3c17bfb654dacea71ed7681c3102a3684d18c319d06e57007e1cd
+    9d749b05168e7c75fa6bfc7477c48b42e61a8e05552605a4bbd93f7c1cac0ae9
+    47422ce3ca8601020ebe5b5f5d6f15231e730feae5d6c237e0c3d5451a2bba72
+    9c6c3c2e053c94729439aa9f3383690b72b0c647441aab64108ef82fb3532476
 )
 
 prepare() {
     cd mkinitcpio-$pkgver
     patch -p1 -i ../0001-use-gzip-for-compression-by-default.patch
+    patch -p1 -i ../0002-functions-handle-gzip-compressed-kernels-in-kver_gen.patch
+    patch -p1 -i ../0003-check-for-ALARM-kernels-in-run_post_hooks.patch
 }
 
 check() {
