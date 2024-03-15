@@ -3,7 +3,7 @@ _nodeps=true
 pkgname=flavour-phosh
 pkgdesc="Kupfer flavour: The gtk-based Phosh (Phone Shell) environment"
 pkgver=0.1
-pkgrel=3
+pkgrel=4
 _arches=all
 arch=(
     x86_64
@@ -12,6 +12,7 @@ arch=(
 )
 license=(GPL)
 depends=(
+    pipewire-jack
     flavour-phosh-minimal
     archlinux-appstream-data
     gnome-software

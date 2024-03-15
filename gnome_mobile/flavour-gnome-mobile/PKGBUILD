@@ -4,7 +4,7 @@ _nodeps=true
 pkgname=flavour-gnome-mobile
 pkgdesc="Kupfer flavour: The gtk-based GNOME desktop environment"
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 _arches=all
 arch=(
     x86_64
@@ -13,6 +13,7 @@ arch=(
 )
 license=(GPL3)
 depends=(
+    pipewire-jack
     flavour-gnome-mobile-minimal
     meta-gnome-common
 )
