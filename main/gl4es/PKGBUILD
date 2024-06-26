@@ -1,5 +1,5 @@
 # Maintainer: Michał Wojdyła < micwoj9292 at gmail dot com >
-_mode=host
+_mode=cross
 pkgname=gl4es
 pkgver=1.1.4
 pkgrel=1

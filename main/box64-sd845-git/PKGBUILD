@@ -1,6 +1,6 @@
 # Maintainer: Jai-JAP <jai.jap.318@gmail.com>
 # Author: Sebastien Chevalier <ptitseb@box86.org>
-_mode=host
+_mode=cross
 pkgname=box64-sd845-git
 pkgver=r2431.60c6858
 pkgrel=1
