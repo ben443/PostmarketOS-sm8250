@@ -2,7 +2,7 @@ _mode=cross
 _kernelname=sm8250
 pkgbase="linux-$_kernelname"
 _desc="Qualcomm SM8250 kernel"
-pkgver=6.7.0
+pkgver=6.9.0
 pkgrel=0
 _arches=specific
 arch=(aarch64)
@@ -18,8 +18,8 @@ makedepends=(
     cpio
 )
 options=(!strip)
-_commit="72559ad9ed5acaac66f72048eb57a69b9055228f"
-_config_commit="52703cce871ce3f1c8cea30bb1d31152ef7c35c1"
+_commit="2c98000c4b589f89810ffefa3eb50ee20a088e9f"
+_config_commit="924c47e1d639b0abf166cc39b2ebe668a4036b8f"
 source=(
     "linux-${_commit}.tar.gz::${url}/-/archive/${_commit}.tar.gz"
     "sm8250.config::https://gitlab.com/postmarketOS/pmaports/-/raw/${_config_commit}/device/testing/linux-postmarketos-qcom-sm8250/config-postmarketos-qcom-sm8250.aarch64
@@ -29,7 +29,7 @@ source=(
     60-linux.hook
     90-linux.hook
 )
-sha256sums=('02f2b7756a0e7515412595cf2b72c607166521a632f4eea87f394b8f01a5170a'
+sha256sums=('5fa549443a7091c5f1983b570241d9313ca731ac185eb2ebe5e9685ba183ee3a'
             '08bbd1d988f95444534da2f1eb972b607e61a8a298843d2254ced60d29e311c2'
             '770324694413ee2491d2987586cba072cfc0e62d0a520d267bbd66acafedaa61'
             '66644820faa950a5fc59181f5aefcbed6d7ed652b29aee69979a2be2a032025d'

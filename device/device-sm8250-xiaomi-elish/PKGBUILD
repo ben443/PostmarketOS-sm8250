@@ -12,13 +12,13 @@ _arches=specific
 arch=(aarch64)
 license=(MIT)
 makedepends=(devicepkg-helpers)
-_commit="a2e7dc074acc386173666c2d736196efa3486696"
+_commit="f133310c02dd2d00b94d8f00d1249ab0a5f0c40a"
 source=(
     "https://gitlab.com/postmarketOS/pmaports/-/raw/${_commit}/device/testing/device-xiaomi-elish/deviceinfo"
     machine-info
     xiaomi-elish.conf
 )
-sha256sums=('3c02ab338bbaa8938aec871e86e0c2cd76a1c714df3343e5d02f1db854ab5b9f'
+sha256sums=('6408b49a87be7dbbf789df7a32a07819f3f838c8e4a2b39c596649c004ab3a77'
             'cfadcb7bf6ca2af12962b9118ccbac3396bb17266a44c12d580d30a51a401b27'
             '20ad52960dd0741a7417d8b545693b44a610474f99c6a2f9bab9e242b0c250d4')
 

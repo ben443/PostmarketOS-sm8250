@@ -6,11 +6,11 @@ _arches=specific
 arch=(aarch64)
 license=(custom:Proprietary)
 options=(!strip)
-_commit="d81ba3dfd6b13a719906b1e1f708fd3e46c8c39b"
+_commit="013b45d1fe64a392c94dc6c58aba72c791be6209"
 source=(
     https://github.com/lujianhua/xiaomi-elish-firmware/archive/$_commit/xiaomi-elish-firmware-$_commit.tar.gz
 )
-sha256sums=('a9af1f898c7c017541ed12728687ac2de4e1b661781fc2a33c6805a5524d169e')
+sha256sums=('e6f7ad7958ce2828ec17f52be0e469e2bdf4fb25c73f3b499336dc762ebef025')
 builddir="xiaomi-elish-firmware-$_commit"
 
 package() {
