@@ -13,7 +13,7 @@ arch=(
 license=(GPL3)
 depends=(
     plasma-meta
-    plasma-wayland-session
+    plasma-workspace
     qt5-virtualkeyboard
     maliit-keyboard
 )
